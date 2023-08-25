@@ -2,6 +2,7 @@
 import {EyeIcon, PencilIcon, TrashIcon, UserPlusIcon} from "@heroicons/vue/20/solid";
 import axios from "axios";
 import {onMounted, ref} from "vue";
+import router from "@/router";
 const studentList = ref('')
 const error = ref('')
 async function getStudentList(){
@@ -17,8 +18,19 @@ async function getStudentList(){
 onMounted(()=>{
   getStudentList()
 })
-function deleteStudent(id){
-
+async function deleteStudent(id){
+  if (!window.confirm("Are you sure ?")) {
+    return
+  }
+  try {
+    const url = 'http://localhost:3000/studentList/';
+    const response = await axios.delete(url + id);
+    if (response.status === 200) {
+      getStudentList()
+    }
+  } catch (err){
+    error.value = err
+  }
 }
 </script>
 
@@ -63,7 +75,7 @@ function deleteStudent(id){
           <RouterLink :to="{name: 'view', params: {id: student.id}}"><EyeIcon class="text-gray-500 h-5 w-5"/></RouterLink>
 
           <RouterLink :to="{name: 'edit', params: {id: student.id}}"><PencilIcon class="text-gray-500 h-5 w-5"/></RouterLink>
-          <TrashIcon @click="deleteStudent(1)" class="text-gray-500 cursor-pointer h-5 w-5"/>
+          <TrashIcon @click="deleteStudent(student.id)" class="text-gray-500 cursor-pointer h-5 w-5"/>
 
         </td>
 

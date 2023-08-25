@@ -22,11 +22,16 @@ onMounted(()=>{
 
 
 async function update(id, data){
-  const url = 'http://localhost:3000/studentList/'
- const response = await axios.put(url + id, data )
-  if (response.status === 200){
-    await router.push('/student')
+  try {
+    const url = 'http://localhost:3000/studentList/';
+    const response = await axios.put(url + id, data);
+    if (response.status === 200) {
+      await router.push('/student')
+    }
+  } catch (err){
+    error.value = err
   }
+
 }
 </script>
 
