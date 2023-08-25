@@ -1,17 +1,25 @@
 <script setup>
-import {RouterLink} from "vue-router";
-import {reactive} from "vue";
-const studentData = reactive({
-  studentName: '',
-  roll: '',
-  class: '',
-  gender: '',
-  bloodGroup: '',
-  religion: '',
-  phone: '',
-  address: ''
+import axios from "axios"
+import {onMounted, ref} from "vue"
+import {useRoute} from "vue-router"
+const student = ref('')
+const error = ref('')
+async function getSingleStudent(id){
+  try {
+    const url = 'http://localhost:3000/studentList/'
+    const response = await axios.get(url + id)
+    student.value = response.data
+  } catch (error) {
+    error.value = error
+  }
+
+}
+const route = useRoute()
+onMounted(()=>{
+  getSingleStudent(route.params.id)
 })
-const addStudent = async ()=>{
+
+function update(){
 
 }
 </script>
@@ -21,7 +29,7 @@ const addStudent = async ()=>{
     <div class="max-w-3xl w-full py-10 bg-white my-16 shadow shadow-blue-100 px-10">
       <h1 class="pb-5 text-center text-2xl font-semibold ">Edit Student Data</h1>
 
-      <form class="w-full">
+      <div class="w-full">
         <div class="flex pb-5 gap-4 items-center justify-between">
           <div class="w-1/2">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student Name <span class="text-red-500">*</span></label>
@@ -63,9 +71,9 @@ const addStudent = async ()=>{
           </div>
         </div>
         <div class="flex gap-5 items-center justify-center">
-          <button type="button" @click="addStudent" class="bg-blue-500 px-16 py-2 rounded-full text-white text-center">Update</button>
+          <button type="button" @click="update()" class="bg-blue-500 px-16 py-2 rounded-full text-white text-center">Update</button>
         </div>
-      </form>
+      </div>
 
     </div>
 
