@@ -1,0 +1,37 @@
+{
+  "studentList": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "roll": 1,
+      "class": "Ten",
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "religion": "Islam",
+      "phone": "017********",
+      "address": "Mirpur-2 , Dhaka, Bangladesh"
+    },
+    {
+      "id": 2,
+      "name": "Bonnie Green",
+      "roll": 2,
+      "class": "Eight",
+      "gender": "Female",
+      "bloodGroup": "AB+",
+      "religion": "Hindu",
+      "phone": "015********",
+      "address": "Gulsan , Dhaka, Bangladesh"
+    },
+    {
+      "id": 3,
+      "name": "Kavitha",
+      "roll": 3,
+      "class": "Six",
+      "gender": "Female",
+      "bloodGroup": "O+",
+      "religion": "Hindu",
+      "phone": "016********",
+      "address": "Gazipur , Dhaka, Bangladesh"
+    }
+  ]
+}
